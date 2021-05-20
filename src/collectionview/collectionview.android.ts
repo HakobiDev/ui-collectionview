@@ -85,7 +85,7 @@ class SimpleCallback extends androidx.recyclerview.widget.ItemTouchHelper.Simple
             owner.isDragging = false;
         }
     }
-    onSwiped(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, direction: number) {}
+    onSwiped(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, direction: number) { }
     isItemViewSwipeEnabled() {
         // disabled for now
         return false;
@@ -140,7 +140,7 @@ declare module '@nativescript/core/ui/core/view' {
 // Snapshot friendly GridViewAdapter
 interface CellViewHolder extends com.nativescript.collectionview.CollectionViewCellHolder {
     // tslint:disable-next-line:no-misused-new
-    new (owner: WeakRef<View>, collectionView: WeakRef<CollectionView>): CellViewHolder;
+    new(owner: WeakRef<View>, collectionView: WeakRef<CollectionView>): CellViewHolder;
 }
 // eslint-disable-next-line no-redeclare
 let CellViewHolder: CellViewHolder;
@@ -597,8 +597,8 @@ export class CollectionView extends CollectionViewBase {
                         }
                         return false;
                     },
-                    onTouchEvent: (param0: androidx.recyclerview.widget.RecyclerView, param1: globalAndroid.view.MotionEvent) => {},
-                    onRequestDisallowInterceptTouchEvent: (disallowIntercept: boolean) => {}
+                    onTouchEvent: (param0: androidx.recyclerview.widget.RecyclerView, param1: globalAndroid.view.MotionEvent) => { },
+                    onRequestDisallowInterceptTouchEvent: (disallowIntercept: boolean) => { }
                 });
             }
             this.nativeViewProtected.addOnItemTouchListener(this._itemTouchListerner);
@@ -781,12 +781,25 @@ export class CollectionView extends CollectionViewBase {
         }
         const layoutManager = this.layoutManager as androidx.recyclerview.widget.LinearLayoutManager;
         if (layoutManager['findFirstVisibleItemPosition']) {
-		    const first = layoutManager.findFirstVisibleItemPosition();
-		    const last = layoutManager.findLastVisibleItemPosition();
-		    return index >= first && index <= last;
+            const first = layoutManager.findFirstVisibleItemPosition();
+            const last = layoutManager.findLastVisibleItemPosition();
+            return index >= first && index <= last;
         }
         return false;
-	}
+    }
+
+    public getFirstVisiblePosition(): any {
+        const view = this.nativeViewProtected;
+        if (!view) {
+            return
+        }
+        const layoutManager = this.layoutManager as androidx.recyclerview.widget.LinearLayoutManager;
+        if (layoutManager['findFirstVisibleItemPosition']) {
+            const first = layoutManager.findFirstVisibleItemPosition();
+            return first;
+        }
+        return
+    }
 
     @profile
     public refresh() {
@@ -1049,7 +1062,7 @@ export class CollectionView extends CollectionViewBase {
 
 interface CollectionViewCellHolder extends com.nativescript.collectionview.CollectionViewCellHolder {
     // tslint:disable-next-line:no-misused-new
-    new (androidView: android.view.View): CollectionViewCellHolder;
+    new(androidView: android.view.View): CollectionViewCellHolder;
     view: View;
     clickListener: android.view.View.OnClickListener;
 }
@@ -1058,7 +1071,7 @@ let CollectionViewCellHolder: CollectionViewCellHolder;
 
 export interface CollectionViewRecyclerView extends com.nativescript.collectionview.RecyclerView {
     // tslint:disable-next-line:no-misused-new
-    new (context: any): CollectionViewRecyclerView;
+    new(context: any): CollectionViewRecyclerView;
 }
 
 let CollectionViewRecyclerView: CollectionViewRecyclerView;

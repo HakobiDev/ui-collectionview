@@ -137,7 +137,8 @@ export abstract class CollectionViewBase extends View implements CollectionViewD
 
     public abstract refresh();
     public abstract refreshVisibleItems();
-    public abstract isItemAtIndexVisible(index:number);
+    public abstract isItemAtIndexVisible(index: number);
+    public abstract getFirstVisiblePosition();
     public abstract scrollToIndex(index: number, animated: boolean);
     public onLayout(left: number, top: number, right: number, bottom: number) {
         super.onLayout(left, top, right, bottom);
@@ -233,7 +234,7 @@ export abstract class CollectionViewBase extends View implements CollectionViewD
     public _onColWidthPropertyChanged(oldValue: CoreTypes.PercentLengthType, newValue: CoreTypes.PercentLengthType) {
         this.refresh();
     }
-    onItemViewLoaderChanged() {}
+    onItemViewLoaderChanged() { }
     _itemViewLoader;
 
     get itemViewLoader() {
@@ -327,8 +328,8 @@ export abstract class CollectionViewBase extends View implements CollectionViewD
             this._itemIdGenerator = newValue;
         }
     }
-    onTemplateAdded(t) {}
-    onTemplateRemoved(key) {}
+    onTemplateAdded(t) { }
+    onTemplateRemoved(key) { }
     addTemplate(key, t) {
         if (!t.key) {
             t.key = t._key;
@@ -358,7 +359,7 @@ export abstract class CollectionViewBase extends View implements CollectionViewD
             this._itemTemplatesInternal.set(this._defaultTemplate.key, this._defaultTemplate);
         }
     }
-    onItemTemplateChanged(oldValue, newValue) {}
+    onItemTemplateChanged(oldValue, newValue) { }
     // onItemTemplateSelectorPropertyChanged(oldValue, newValue) {
     //     this.onItemTemplateSelectorChanged(oldValue, newValue);
     // }

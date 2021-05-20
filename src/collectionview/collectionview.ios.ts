@@ -514,10 +514,20 @@ export class CollectionView extends CollectionViewBase {
         if (!view) {
             return false;
         }
-		const indexes: NSIndexPath[] = Array.from(view.indexPathsForVisibleItems);
+        const indexes: NSIndexPath[] = Array.from(view.indexPathsForVisibleItems);
 
-		return indexes.some((visIndex) => visIndex.row === itemIndex);
-	}
+        return indexes.some((visIndex) => visIndex.row === itemIndex);
+    }
+
+    public getFirstVisiblePosition(): any {
+        const view = this.nativeViewProtected;
+        if (!view) {
+            return;
+        }
+        const first = view.indexPathsForVisibleItems.firstObject
+
+        return first;
+    }
 
     @profile
     public refresh() {
@@ -904,7 +914,7 @@ export class CollectionView extends CollectionViewBase {
 }
 contentInsetAdjustmentBehaviorProperty.register(CollectionView);
 
-interface ViewItemIndex {}
+interface ViewItemIndex { }
 
 type ItemView = View & ViewItemIndex;
 
